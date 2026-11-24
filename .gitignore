@@ -1,0 +1,13 @@
+/target/
+**/*.rs.bk
+*.bin
+*.db
+*.db-shm
+*.db-wal
+*.key
+*.witness.json
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db

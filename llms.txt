@@ -1,0 +1,15 @@
+# sextant — Verifiable Agent Call-Graph Provenance
+
+> Pure Rust 2024 library (`sextant_core`) and CLI/TUI (`sextant`) binding autonomous agent tool calls, parent-child forks, and return payloads into a tamper-evident BLAKE3 accumulator signed by an ephemeral ZeroizeOnDrop Ed25519 key.
+
+## Key Files
+- `src/lib.rs`: `#![forbid(unsafe_code)]` crate root and `SextantError`.
+- `src/canonical.rs`: Deterministic `BTreeMap`-sorted JSON canonicalization, LEB128 framing, and CWE-150 sanitization.
+- `src/merkle.rs`: Binary Merkle trees, `O(log k)` `ProvenanceWitness` generation and verification.
+- `src/crypto.rs`: `AccumulatorState`, `SessionSigner` (`ZeroizeOnDrop`), `ExecutionNode`, `verify_ledger`, `generate_offline_witness`.
+- `src/wire.rs`: `"SEXT"` v1 append-only binary ledger format.
+- `src/index.rs`: Bundled `rusqlite` WAL SQLite index (`BEGIN IMMEDIATE`).
+- `src/fleet.rs`: `SigNET`, `Faraday`, and selective-redaction provenance adapters.
+- `src/cli.rs`: `init`, `wrap`, `record`, `verify-path`, `export-graph`, `tui`.
+- `src/tui/`: 3-pane `ratatui` v0.30 provenance inspector.
+- `tests/prop_provenance.rs`: 500-case `proptest` tamper detection, fork/join binding, witness, wire, SQLite, and `TestBackend` TUI suite.

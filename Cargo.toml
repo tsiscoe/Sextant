@@ -1,0 +1,60 @@
+[package]
+name = "sextant"
+version = "0.1.2"
+edition = "2024"
+authors = ["tsiscoe <tsiscoe@users.noreply.github.com>"]
+description = "Sextant: Verifiable Route & Call-Graph Provenance Engine for Autonomous Agent Execution (Pure Rust 2024)"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/tsiscoe/Sextant"
+readme = "README.md"
+keywords = ["cryptography", "provenance", "merkle", "blake3", "ed25519"]
+categories = ["command-line-utilities", "cryptography", "development-tools"]
+
+[[bin]]
+name = "sextant"
+path = "src/main.rs"
+
+[lib]
+name = "sextant_core"
+path = "src/lib.rs"
+
+[dependencies]
+anyhow = "1.0"
+thiserror = "2.0"
+clap = { version = "4.5", features = ["derive", "env"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+# Cryptography (Pure-Rust BLAKE3 + Ed25519 + Subtle + Zeroize)
+blake3 = "1.5"
+ed25519-dalek = { version = "2.1", features = ["rand_core", "zeroize"] }
+zeroize = { version = "1.8", features = ["derive"] }
+rand = "0.8"
+hex = "0.4"
+subtle = "2.6"
+
+# Storage (SQLite WAL mode bundled >= 3.51.2)
+rusqlite = { version = "0.42.0", features = ["bundled"] }
+
+# TUI (Ratatui v0.30+ & Crossterm)
+ratatui = "0.30"
+crossterm = "0.28"
+
+# Utilities
+chrono = { version = "0.4", features = ["serde"] }
+
+[dev-dependencies]
+proptest = "1.5"
+tempfile = "3.14"
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[lints.clippy]
+unwrap_used = "warn"
+
+[profile.dev.package.blake3]
+opt-level = 3
+
+[profile.dev.package.ed25519-dalek]
+opt-level = 3
