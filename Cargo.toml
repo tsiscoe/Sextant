@@ -27,7 +27,7 @@ serde_json = "1.0"
 
 # Cryptography (Pure-Rust BLAKE3 + Ed25519 + Subtle + Zeroize)
 blake3 = "1.5"
-ed25519-dalek = { version = "2.1", features = ["rand_core", "zeroize"] }
+ed25519-dalek = { version = "3.0", features = ["rand_core", "zeroize"] }
 zeroize = { version = "1.8", features = ["derive"] }
 rand = "0.8"
 hex = "0.4"
